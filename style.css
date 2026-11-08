@@ -1,0 +1,140 @@
+:root {
+  --bumaga: #fbf7ef;
+  --chernila: #241c18;
+  --seryy: #57493f;
+  --akcent: #7a1f1f;
+  --akcent-svetlyy: #f1e3d6;
+  --liniya: #d9cbb8;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bumaga);
+  color: var(--chernila);
+  font-family: Georgia, "Noto Serif", "PT Serif", "Times New Roman", serif;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 18px 16px 56px;
+}
+
+h1 { font-size: 34px; line-height: 1.15; margin: 4px 0 8px; font-weight: 700; }
+h2 { font-size: 24px; line-height: 1.2; margin: 34px 0 12px; font-weight: 700; color: var(--akcent); }
+p { margin: 0 0 10px; }
+
+a { color: var(--akcent); }
+
+.shapka p { color: var(--seryy); }
+.shapka .metka { color: var(--akcent); font-weight: 700; margin: 0; }
+
+.nazad {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  font-size: 21px;
+}
+.nazad::before { content: "\2039"; font-size: 30px; line-height: 1; margin-right: 10px; }
+
+.golosa { display: grid; gap: 14px; }
+
+.golos {
+  display: block;
+  padding: 24px 20px;
+  background: var(--akcent);
+  color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.golos span { display: block; font-size: 21px; font-weight: 400; margin-top: 4px; }
+.golos em { display: block; font-size: 19px; font-style: normal; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .45); }
+
+.golos em[hidden] { display: none; }
+
+.kak ol { margin: 0; padding-left: 28px; }
+.kak li { margin-bottom: 8px; }
+
+.spisok { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--liniya); }
+.spisok a {
+  display: block;
+  min-height: 72px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--liniya);
+  color: var(--chernila);
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.spisok span { display: block; font-size: 19px; font-weight: 400; color: var(--seryy); margin-top: 3px; }
+
+video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border: 1px solid var(--liniya);
+  border-radius: 8px;
+  margin-top: 14px;
+}
+
+.upravlenie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.upravlenie[hidden] { display: none; }
+
+button, .knopka, .sohranit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 8px 10px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--akcent);
+  background: var(--akcent-svetlyy);
+  border: 2px solid var(--akcent);
+  border-radius: 10px;
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+button { font-size: 19px; }
+button[aria-pressed="true"] { background: var(--akcent); color: #fff; }
+
+.sohranit { margin-top: 8px; font-size: 19px; }
+.perezagruzit { width: 100%; margin-top: 10px; background: var(--akcent); color: #fff; }
+.perezagruzit[hidden] { display: none; }
+.melko { color: var(--seryy); font-size: 18px; margin-top: 6px; }
+
+.net-rolika {
+  margin-top: 14px;
+  padding: 16px;
+  background: var(--akcent-svetlyy);
+  border-radius: 10px;
+}
+
+.podskazka { color: var(--seryy); font-size: 19px; }
+
+.noty a { display: block; margin-bottom: 12px; }
+.noty img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--liniya);
+  border-radius: 6px;
+}
+
+.dalshe { display: grid; gap: 10px; margin-top: 30px; }
+.knopka.glavnaya { background: var(--akcent); color: #fff; }
+
+.azbuka { margin-top: 20px; font-size: 19px; }
