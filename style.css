@@ -87,6 +87,8 @@ video {
   margin-top: 14px;
 }
 
+video.shirokoe { aspect-ratio: 1920 / 540; }
+
 .upravlenie { display: grid; gap: 8px; margin-top: 10px; }
 .upravlenie[hidden], .zvuchit[hidden] { display: none; }
 .ryad { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
