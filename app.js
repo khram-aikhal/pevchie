@@ -29,7 +29,7 @@
   var mesto = 0;
   function pokazatZanovo() { if (zanovo) zanovo.hidden = false; }
   rolik.addEventListener("error", pokazatZanovo);
-  rolik.addEventListener("stalled", pokazatZanovo);
+  rolik.addEventListener("stalled", function () { if (!rolik.paused) pokazatZanovo(); });
   rolik.addEventListener("timeupdate", function () { if (rolik.currentTime) mesto = rolik.currentTime; });
   rolik.addEventListener("playing", function () { if (zanovo) zanovo.hidden = true; });
   if (zanovo) {
@@ -45,30 +45,67 @@
     });
   }
 
-  var SKOROST_MEDLENNO = 0.75;
-
   // iOS сбрасывает скорость при новой загрузке, поэтому храним её сами.
   var skorost = 1;
   function primenitSkorost() { rolik.playbackRate = skorost; }
   rolik.addEventListener("loadedmetadata", primenitSkorost);
   rolik.addEventListener("play", primenitSkorost);
 
+  function otmetit(gruppa, vybrannaya) {
+    gruppa.forEach(function (k) { k.setAttribute("aria-pressed", String(k === vybrannaya)); });
+  }
+
+  var knopkiSkorosti = [].slice.call(panel.querySelectorAll("[data-skorost]"));
   panel.addEventListener("click", function (sobytie) {
     var b = sobytie.target.closest("button");
     if (!b) return;
+    if (b.hasAttribute("data-skorost")) {
+      skorost = parseFloat(b.getAttribute("data-skorost"));
+      primenitSkorost();
+      otmetit(knopkiSkorosti, b);
+      return;
+    }
     var d = b.getAttribute("data-deystvie");
     if (d === "snachala") {
       rolik.currentTime = 0;
       var igra = rolik.play();
       if (igra && igra.catch) igra.catch(function () {});
-    } else if (d === "medlennee") {
-      var vkl = skorost === 1;
-      skorost = vkl ? SKOROST_MEDLENNO : 1;
-      primenitSkorost();
-      b.setAttribute("aria-pressed", String(vkl));
     } else if (d === "krug") {
       rolik.loop = !rolik.loop;
       b.setAttribute("aria-pressed", String(rolik.loop));
     }
   });
+
+  // «Мой голос» и соседний голос: то же место в музыке, те же ноты.
+  var zvuchit = document.querySelector(".zvuchit");
+  if (zvuchit) {
+    zvuchit.hidden = false;
+    var knopkiGolosa = [].slice.call(zvuchit.querySelectorAll("[data-rolik]"));
+    var sohranit = document.querySelector(".sohranit");
+    zvuchit.addEventListener("click", function (sobytie) {
+      var b = sobytie.target.closest("[data-rolik]");
+      if (!b || b.getAttribute("aria-pressed") === "true") return;
+      var bylo = rolik.currentTime;
+      var dlitBylo = rolik.duration;
+      var igralo = !rolik.paused;
+      var adres = "../video/" + b.getAttribute("data-rolik");
+      otmetit(knopkiGolosa, b);
+      var kadr = b.getAttribute("data-kadr");
+      if (kadr) rolik.poster = "../video/" + kadr;
+      rolik.src = adres;
+      if (sohranit) {
+        sohranit.href = adres;
+        sohranit.setAttribute("download", b.getAttribute("data-imya"));
+      }
+      rolik.addEventListener("loadedmetadata", function vernut() {
+        rolik.removeEventListener("loadedmetadata", vernut);
+        // Записи голосов иногда разной длины, поэтому место считаем в долях.
+        if (bylo && dlitBylo) rolik.currentTime = bylo / dlitBylo * rolik.duration;
+        if (igralo) {
+          var igra = rolik.play();
+          if (igra && igra.catch) igra.catch(function () {});
+        }
+      });
+    });
+  }
 })();

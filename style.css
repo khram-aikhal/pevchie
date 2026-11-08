@@ -87,8 +87,16 @@ video {
   margin-top: 14px;
 }
 
-.upravlenie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
-.upravlenie[hidden] { display: none; }
+.upravlenie { display: grid; gap: 8px; margin-top: 10px; }
+.upravlenie[hidden], .zvuchit[hidden] { display: none; }
+.ryad { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
+.ryad.skorost { grid-auto-flow: row; grid-template-columns: 1.4fr 1fr 1fr; }
+.zvuchit { margin-top: 18px; }
+.zvuchit h2 { margin-top: 0; }
+.zvuchit .podskazka { margin-top: 10px; }
+@media (max-width: 359px) {
+  .ryad.skorost { grid-template-columns: 1fr; }
+}
 
 button, .knopka, .sohranit {
   display: flex;
