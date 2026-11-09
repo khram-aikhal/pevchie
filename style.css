@@ -36,12 +36,47 @@ a { color: var(--akcent); }
 .shapka .metka { color: var(--akcent); font-weight: 700; margin: 0; }
 
 .nazad {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  min-height: 56px;
-  font-size: 21px;
+  min-height: 68px;
+  padding: 8px 16px 8px 12px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+  color: var(--akcent);
+  background: var(--akcent-svetlyy);
+  border: 2px solid var(--akcent);
+  border-radius: 10px;
+  touch-action: manipulation;
+  margin-bottom: 14px;
 }
-.nazad::before { content: "\2039"; font-size: 30px; line-height: 1; margin-right: 10px; }
+.nazad::before { content: "\2039"; font-size: 52px; line-height: .8; margin: -6px 14px 0 0; }
+
+.sluzhby { display: grid; gap: 10px; margin-top: 14px; }
+.k-sluzhbe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68px;
+  padding: 8px 12px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--akcent);
+  border-radius: 10px;
+  text-decoration: none;
+}
+h2.sluzhba {
+  margin: 44px 0 0;
+  padding: 16px;
+  font-size: 30px;
+  color: #fff;
+  background: var(--akcent);
+  border-radius: 10px;
+  scroll-margin-top: 8px;
+}
+h2.sluzhba + h2 { margin-top: 22px; }
 
 .golosa { display: grid; gap: 14px; }
 
